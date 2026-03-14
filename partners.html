@@ -1,0 +1,760 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Global Partners — DAMO Group</title>
+  <meta name="description" content="DAMO Group's global pharmaceutical partners — 16 trusted agents across Iraq, Egypt, India, Spain, USA, Canada, Singapore, and Tunisia.">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Outfit:wght@600;700&display=swap" rel="stylesheet">
+  <link rel="icon" type="image/png" href="assets/images/logos/damo-manufacturing-logo.png">
+  <link rel="stylesheet" href="css/variables.css">
+  <link rel="stylesheet" href="css/base.css">
+  <link rel="stylesheet" href="css/components.css">
+  <link rel="stylesheet" href="css/animations.css">
+  <link rel="stylesheet" href="css/rtl.css">
+  <!-- Leaflet.js CDN -->
+  <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" />
+  <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
+  <script src="https://unpkg.com/lucide@latest/dist/umd/lucide.js"></script>
+  <style>
+    /* ── Leaflet Map ── */
+    .map-section { padding: var(--space-3xl) 0 var(--space-xl); }
+    .map-container {
+      max-width: 1000px;
+      margin: 0 auto;
+      border-radius: var(--radius-lg);
+      overflow: hidden;
+      border: 1px solid var(--border-glass);
+      background: #0d1b2a;
+    }
+    #partnerMap {
+      width: 100%;
+      height: 480px;
+      background: #0d1b2a;
+    }
+    @media (max-width: 768px) {
+      #partnerMap { height: 320px; }
+    }
+
+    /* Hide Leaflet branding */
+    .leaflet-control-attribution { display: none !important; }
+    .leaflet-control-zoom { display: none !important; }
+
+    /* Custom Leaflet markers — steady glow, no blinking */
+    .map-marker {
+      width: 14px; height: 14px;
+      border-radius: 50%;
+      background: var(--accent-gold);
+      border: 2px solid rgba(212, 168, 83, 0.5);
+      box-shadow: 0 0 10px rgba(212, 168, 83, 0.5), 0 0 24px rgba(212, 168, 83, 0.2);
+      cursor: pointer;
+      transition: transform 0.2s, box-shadow 0.2s;
+    }
+    .map-marker:hover {
+      transform: scale(1.5);
+      box-shadow: 0 0 16px rgba(212, 168, 83, 0.9), 0 0 32px rgba(212, 168, 83, 0.4);
+    }
+    .map-marker--hub {
+      width: 16px; height: 16px;
+      background: var(--accent-turquoise);
+      border-color: rgba(0, 180, 216, 0.5);
+      box-shadow: 0 0 12px rgba(0, 180, 216, 0.6), 0 0 28px rgba(0, 180, 216, 0.25);
+    }
+    .map-marker--hub:hover {
+      box-shadow: 0 0 18px rgba(0, 180, 216, 0.9), 0 0 36px rgba(0, 180, 216, 0.4);
+    }
+
+    /* Leaflet popup style override */
+    .leaflet-popup-content-wrapper {
+      background: rgba(17, 29, 51, 0.96) !important;
+      color: var(--text-primary) !important;
+      border: 1px solid var(--border-glass) !important;
+      border-radius: 10px !important;
+      backdrop-filter: blur(12px);
+      box-shadow: 0 8px 32px rgba(0,0,0,0.5) !important;
+    }
+    .leaflet-popup-tip { background: rgba(17, 29, 51, 0.96) !important; }
+    .leaflet-popup-content {
+      margin: 12px 16px !important;
+      font-family: 'Inter', sans-serif !important;
+      font-size: 0.8rem !important;
+      line-height: 1.4 !important;
+      width: auto !important;
+    }
+    .leaflet-popup-content strong {
+      color: var(--accent-gold);
+      font-size: 0.9rem;
+    }
+    .leaflet-popup-close-button {
+      color: var(--text-muted) !important;
+      font-size: 18px !important;
+    }
+    /* Popup partner mini-cards */
+    .popup-partners {
+      display: flex;
+      flex-direction: column;
+      gap: 5px;
+      margin-top: 10px;
+    }
+    .popup-partner {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      background: rgba(255,255,255,0.04);
+      border: 1px solid rgba(255,255,255,0.08);
+      border-radius: 6px;
+      padding: 6px 10px;
+    }
+    .popup-partner img {
+      width: 28px;
+      height: 22px;
+      object-fit: contain;
+      flex-shrink: 0;
+    }
+    .popup-partner span {
+      font-size: 0.72rem;
+      color: #c5cad3;
+      font-weight: 500;
+    }
+
+    /* ── Partner Cards Grid ── */
+    .partners-grid {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: var(--space-md);
+    }
+    @media (max-width: 1024px) { .partners-grid { grid-template-columns: repeat(3, 1fr); } }
+    @media (max-width: 768px) { .partners-grid { grid-template-columns: repeat(2, 1fr); } }
+    @media (max-width: 480px) { .partners-grid { grid-template-columns: 1fr; } }
+
+    /* ── Partner Card ── */
+    .p-card {
+      background: var(--bg-card);
+      backdrop-filter: blur(12px);
+      border: 1px solid var(--border-glass);
+      border-radius: var(--radius-md);
+      padding: var(--space-lg) var(--space-md);
+      text-align: center;
+      cursor: pointer;
+      transition: all var(--transition-base);
+      position: relative;
+    }
+    .p-card:hover {
+      background: var(--bg-card-hover);
+      border-color: var(--border-gold);
+      transform: translateY(-4px);
+      box-shadow: var(--shadow-card-hover);
+    }
+    .p-card__flag {
+      position: absolute;
+      top: 8px; right: 10px;
+      font-size: 1rem;
+    }
+    .p-card__logo {
+      width: 100%; height: 60px;
+      display: flex; align-items: center; justify-content: center;
+      margin-bottom: var(--space-sm);
+      padding: 0 var(--space-xs);
+    }
+    .p-card__logo img {
+      max-width: 100%; max-height: 55px;
+      object-fit: contain;
+      filter: brightness(1.1);
+      transition: filter 0.3s;
+    }
+    .p-card:hover .p-card__logo img { filter: brightness(1.3); }
+    .p-card__name {
+      font-family: var(--font-heading);
+      font-weight: var(--fw-semibold);
+      color: var(--text-primary);
+      font-size: 0.8rem; line-height: 1.3;
+      margin-bottom: 3px;
+    }
+    .p-card__country { color: var(--text-muted); font-size: 0.7rem; }
+
+    /* ── Modal fix ── */
+    .partner-modal__link {
+      display: inline-flex !important;
+      cursor: pointer;
+      z-index: 100;
+      position: relative;
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Navigation -->
+  <nav class="nav" id="nav">
+    <div class="nav__inner">
+      <a href="index.html" class="nav__logo"><span class="logo-accent">DAMO</span>&nbsp;Group</a>
+      <div class="nav__links" id="navLinks">
+        <a href="index.html" data-i18n="nav.home">Home</a>
+        <a href="alqawsan.html" data-i18n="nav.alqawsan">Al-Qawsan</a>
+        <a href="cas-development.html" data-i18n="nav.cas">CAS Development</a>
+        <a href="damo-manufacturing.html" data-i18n="nav.damo">DAMO Manufacturing</a>
+        <a href="partners.html" data-i18n="nav.partners">Partners</a>
+        <a href="government.html" data-i18n="nav.gov">Gov. Partnerships</a>
+        <a href="contact.html" data-i18n="nav.contact">Contact</a>
+        <a href="news.html" data-i18n="nav.news">News</a>
+      </div>
+      <button id="langToggle" class="nav__lang-toggle" onclick="toggleLanguage()">عربي</button>
+      <button id="themeToggle" class="nav__theme-toggle" onclick="toggleTheme()" aria-label="Toggle theme" title="Toggle light/dark mode"></button>
+      <button class="nav__toggle" id="navToggle" aria-label="Toggle menu"><span></span><span></span><span></span></button>
+    </div>
+  </nav>
+  <div class="nav__overlay" id="navOverlay"></div>
+
+  <!-- Page Hero -->
+  <section class="page-hero">
+    <div class="hero__bg">
+      <div class="particle particle--1"></div>
+      <div class="particle particle--2"></div>
+    </div>
+    <div class="hero__overlay"></div>
+    <div class="page-hero__content">
+      <span class="overline">Our Network</span>
+      <h1>Global <span class="highlight">Partners</span></h1>
+      <p>Connecting Iraq to the world through trusted pharmaceutical partnerships across 8 countries.</p>
+    </div>
+  </section>
+
+  <!-- World Map (Leaflet) -->
+  <section class="map-section">
+    <div class="container container--wide">
+      <div class="section-header reveal">
+        <span class="overline">Worldwide Presence</span>
+        <h2>Our Global Footprint</h2>
+        <p>Click on the map markers to discover our partners in each country.</p>
+      </div>
+      <div class="map-container reveal">
+        <div id="partnerMap"></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Filter & Partner Grid -->
+  <section style="background: var(--bg-secondary);">
+    <div class="container">
+
+      <!-- Filter Bar -->
+      <div class="filter-bar reveal">
+        <button class="filter-bar__btn active" data-filter="all">All Partners</button>
+        <button class="filter-bar__btn" data-filter="iraq">🇮🇶 Iraq</button>
+        <button class="filter-bar__btn" data-filter="egypt">🇪🇬 Egypt</button>
+        <button class="filter-bar__btn" data-filter="usa">🇺🇸 USA</button>
+        <button class="filter-bar__btn" data-filter="india">🇮🇳 India</button>
+        <button class="filter-bar__btn" data-filter="spain">🇪🇸 Spain</button>
+        <button class="filter-bar__btn" data-filter="canada">🇨🇦 Canada</button>
+        <button class="filter-bar__btn" data-filter="singapore">🇸🇬 Singapore</button>
+        <button class="filter-bar__btn" data-filter="tunisia">🇹🇳 Tunisia</button>
+        <button class="filter-bar__btn" data-filter="turkey">🇹🇷 Turkey</button>
+      </div>
+
+      <!-- ═══ 16 Partner Cards ═══ -->
+      <div class="partners-grid stagger-reveal" id="partnerGrid">
+
+        <!-- 1. SDI -->
+        <div class="p-card" data-region="iraq"
+          data-name="State Company for Drug Industries (SDI)"
+          data-flag="🇮🇶" data-country="Iraq"
+          data-desc="The first and most important pharmaceutical manufacturer in Iraq. Established in 1965, the company began full production in 1970 and has since played a key role in supplying high-quality medicines to the Iraqi market."
+          data-url="https://www.sdi.industry.gov.iq">
+          <span class="p-card__flag">🇮🇶</span>
+          <div class="p-card__logo">
+            <img loading="lazy" src="https://alqawsangroup.com/wp-content/uploads/2026/02/SDI.jpg" alt="SDI Logo">
+          </div>
+          <div class="p-card__name">SDI</div>
+          <div class="p-card__country">Iraq</div>
+        </div>
+
+        <!-- 2. El Nasr -->
+        <div class="p-card" data-region="egypt"
+          data-name="El Nasr Pharmaceutical Chemicals Co. (ADWIC)"
+          data-flag="🇪🇬" data-country="Egypt"
+          data-desc="Established in 1960, the first company in the region dedicated to manufacturing active pharmaceutical ingredients (APIs) and raw materials. Produces IV solutions, finished dosage forms, surgical sutures. A key subsidiary of the Holding Company for Pharmaceuticals."
+          data-url="https://elnasrpharma.com">
+          <span class="p-card__flag">🇪🇬</span>
+          <div class="p-card__logo">
+            <img loading="lazy" src="https://alqawsangroup.com/wp-content/uploads/2026/02/logo.svg-1.png" alt="El Nasr Logo">
+          </div>
+          <div class="p-card__name">El Nasr Pharma</div>
+          <div class="p-card__country">Egypt</div>
+        </div>
+
+        <!-- 3. GYPTO -->
+        <div class="p-card" data-region="egypt"
+          data-name="GYPTO Pharma"
+          data-flag="🇪🇬" data-country="Egypt"
+          data-desc="A shareholding company under Investment Law 159, operating with world-class standards. Annual capacity exceeding 200 million units. Supported by experienced leadership committed to international healthcare needs."
+          data-url="https://www.gyptopharma.com">
+          <span class="p-card__flag">🇪🇬</span>
+          <div class="p-card__logo">
+            <img loading="lazy" src="https://alqawsangroup.com/wp-content/uploads/2026/02/gypto-pharma-007-06-1.png" alt="GYPTO Pharma Logo">
+          </div>
+          <div class="p-card__name">GYPTO Pharma</div>
+          <div class="p-card__country">Egypt</div>
+        </div>
+
+        <!-- 4. Kahira -->
+        <div class="p-card" data-region="egypt"
+          data-name="Kahira Pharmaceuticals and Chemical Industries"
+          data-flag="🇪🇬" data-country="Egypt"
+          data-desc="Established in 1962, renowned for manufacturing high-quality medicines under licenses from several major international pharmaceutical firms. Produces tablets, capsules, and syrups across various medical specialties."
+          data-url="https://kahira-pharmaeg.com">
+          <span class="p-card__flag">🇪🇬</span>
+          <div class="p-card__logo">
+            <img loading="lazy" src="https://alqawsangroup.com/wp-content/uploads/2026/02/logo4_En-1.png" alt="Kahira Logo">
+          </div>
+          <div class="p-card__name">Kahira Pharmaceuticals</div>
+          <div class="p-card__country">Egypt</div>
+        </div>
+
+        <!-- 5. Alexandria -->
+        <div class="p-card" data-region="egypt"
+          data-name="Alexandria Co. for Pharmaceuticals"
+          data-flag="🇪🇬" data-country="Egypt"
+          data-desc="Established in 1962. 185+ human and veterinary products, unique specialty in dental anesthetics. 250,000 packs/day capacity. Exports to 17+ countries. GMP certified."
+          data-url="https://alexcopharma.net">
+          <span class="p-card__flag">🇪🇬</span>
+          <div class="p-card__logo">
+            <img loading="lazy" src="https://alqawsangroup.com/wp-content/uploads/2026/02/alex.png" alt="Alexandria Co. Logo">
+          </div>
+          <div class="p-card__name">Alexandria Co.</div>
+          <div class="p-card__country">Egypt</div>
+        </div>
+
+        <!-- 6. Máyla -->
+        <div class="p-card" data-region="spain"
+          data-name="Máyla Pharma"
+          data-flag="🇪🇸" data-country="Spain (Barcelona)"
+          data-desc="Founded in 2012 in Barcelona, specialized in Consumer Healthcare. Joint care, digestive health, mental well-being. FDA certified. Presence in Europe, Asia, and the Americas."
+          data-url="https://maylapharma.com/en/">
+          <span class="p-card__flag">🇪🇸</span>
+          <div class="p-card__logo">
+            <img loading="lazy" src="https://alqawsangroup.com/wp-content/uploads/2026/02/Header_Logo-Provisional.png" alt="Máyla Pharma Logo">
+          </div>
+          <div class="p-card__name">Máyla Pharma</div>
+          <div class="p-card__country">Spain</div>
+        </div>
+
+        <!-- 7. Dawah -->
+        <div class="p-card" data-region="usa"
+          data-name="Dawah Pharmaceuticals"
+          data-flag="🇺🇸" data-country="USA / Egypt"
+          data-desc="US-based with 30+ years of healthcare leadership. Joint ventures Dawah–Gypto Pharma and Dawah–Holdi Pharma. 200M+ units annually. Growing presence in MENA."
+          data-url="https://www.dawahpharma.com">
+          <span class="p-card__flag">🇺🇸</span>
+          <div class="p-card__logo">
+            <img loading="lazy" src="https://alqawsangroup.com/wp-content/uploads/2026/02/Dawah-Logo-New-1.avif" alt="Dawah Pharma Logo">
+          </div>
+          <div class="p-card__name">Dawah Pharma</div>
+          <div class="p-card__country">USA / Egypt</div>
+        </div>
+
+        <!-- 8. CID -->
+        <div class="p-card" data-region="egypt"
+          data-name="Chemical Industries Development (CID)"
+          data-flag="🇪🇬" data-country="Egypt (Giza)"
+          data-desc="Founded 1947, one of Egypt's oldest pharma companies. Pioneer in effervescent tablets and hormonal ampoules. Exports to ~40 countries. Subsidiary of Drug Holding Company."
+          data-url="https://www.cid-pharma.com">
+          <span class="p-card__flag">🇪🇬</span>
+          <div class="p-card__logo">
+            <img loading="lazy" src="https://alqawsangroup.com/wp-content/uploads/2026/02/cidlogo-removebg-preview.webp" alt="CID Logo">
+          </div>
+          <div class="p-card__name">CID Pharma</div>
+          <div class="p-card__country">Egypt</div>
+        </div>
+
+        <!-- 9. Memphis -->
+        <div class="p-card" data-region="egypt"
+          data-name="Memphis Pharmaceutical & Chemical Industries"
+          data-flag="🇪🇬" data-country="Egypt"
+          data-desc="Founded in 1940, one of the oldest drug manufacturers in Egypt. Cardiology, diabetes, infectious diseases. Modern GMP facilities. Strategic subsidiary of Holding Company."
+          data-url="https://www.memphis.com.eg">
+          <span class="p-card__flag">🇪🇬</span>
+          <div class="p-card__logo">
+            <img loading="lazy" src="https://alqawsangroup.com/wp-content/uploads/2026/02/logo-1-1.png" alt="Memphis Pharma Logo">
+          </div>
+          <div class="p-card__name">Memphis Pharma</div>
+          <div class="p-card__country">Egypt</div>
+        </div>
+
+        <!-- 10. ADCO -->
+        <div class="p-card" data-region="egypt"
+          data-name="Arab Drug Company (ADCO)"
+          data-flag="🇪🇬" data-country="Egypt"
+          data-desc="Incorporated 1963 as the 'House of Aerosols'. Pioneer in inhalers and topical aerosols. 130+ products, 40 therapeutic groups. ISO 9001 and ISO 14001 certified."
+          data-url="https://adcopharma-eg.com">
+          <span class="p-card__flag">🇪🇬</span>
+          <div class="p-card__logo">
+            <img loading="lazy" src="https://alqawsangroup.com/wp-content/uploads/2026/02/logoEn.png" alt="ADCO Logo">
+          </div>
+          <div class="p-card__name">ADCO</div>
+          <div class="p-card__country">Egypt</div>
+        </div>
+
+        <!-- 11. Nile -->
+        <div class="p-card" data-region="egypt"
+          data-name="Nile Co. for Pharmaceuticals"
+          data-flag="🇪🇬" data-country="Egypt (Cairo)"
+          data-desc="Founded 1962, cornerstone of Egypt's pharma sector. Massive Cairo facilities. Wide range under own brand and international licenses. Advanced R&D labs."
+          data-url="https://nilepharma.com.eg">
+          <span class="p-card__flag">🇪🇬</span>
+          <div class="p-card__logo">
+            <img loading="lazy" src="https://alqawsangroup.com/wp-content/uploads/2026/02/nile.png" alt="Nile Co. Logo">
+          </div>
+          <div class="p-card__name">Nile Co.</div>
+          <div class="p-card__country">Egypt</div>
+        </div>
+
+        <!-- 12. Corona Remedies -->
+        <div class="p-card" data-region="india"
+          data-name="Corona Remedies Pvt. Ltd."
+          data-flag="🇮🇳" data-country="India (Ahmedabad)"
+          data-desc="Established 2004 in Ahmedabad. One of India's fastest-growing pharma companies. Women's healthcare, cardio-diabetology, pain management. 70+ brands."
+          data-url="https://www.coronaremedies.com">
+          <span class="p-card__flag">🇮🇳</span>
+          <div class="p-card__logo">
+            <img loading="lazy" src="https://alqawsangroup.com/wp-content/uploads/2026/02/new-logo-google.png" alt="Corona Remedies Logo">
+          </div>
+          <div class="p-card__name">Corona Remedies</div>
+          <div class="p-card__country">India</div>
+        </div>
+
+        <!-- 13. Misr Pharma -->
+        <div class="p-card" data-region="egypt"
+          data-name="Misr Pharmaceutical Industries"
+          data-flag="🇪🇬" data-country="Egypt"
+          data-desc="Founded 1940 by pioneer Talaat Harb as the first national pharma company in Egypt and the Middle East. Extracts, finished dosage forms. GMP. Global exports."
+          data-url="https://www.misrpharma.com.eg">
+          <span class="p-card__flag">🇪🇬</span>
+          <div class="p-card__logo">
+            <img loading="lazy" src="https://alqawsangroup.com/wp-content/uploads/2026/02/logo1.png" alt="Misr Pharma Logo">
+          </div>
+          <div class="p-card__name">Misr Pharma</div>
+          <div class="p-card__country">Egypt</div>
+        </div>
+
+        <!-- 14. BIOWeLL -->
+        <div class="p-card" data-region="canada"
+          data-name="BIOWeLL Laboratories"
+          data-flag="🇨🇦" data-country="Canada (Windsor, Ontario)"
+          data-desc="Premier Canadian contract manufacturer of health supplements. Health Canada-approved, FDA-registered. NSF Gold, GMP, Halal, Kosher certified. Capsules, tablets, powders, gummies."
+          data-url="https://biowelllabs.ca">
+          <span class="p-card__flag">🇨🇦</span>
+          <div class="p-card__logo">
+            <img loading="lazy" src="https://alqawsangroup.com/wp-content/uploads/2026/02/BIOWELL.svg" alt="BIOWeLL Logo">
+          </div>
+          <div class="p-card__name">BIOWeLL</div>
+          <div class="p-card__country">Canada</div>
+        </div>
+
+        <!-- 15. SIBIONICS -->
+        <div class="p-card" data-region="singapore"
+          data-name="SIBIONICS"
+          data-flag="🇸🇬" data-country="Singapore"
+          data-desc="Founded 2015, headquartered in Singapore. GS1 Continuous Glucose Monitoring (CGM) system. EU MDR CE certified (2023). 14-day calibration-free. AI-driven data analysis."
+          data-url="https://www.sibionicscgm.com">
+          <span class="p-card__flag">🇸🇬</span>
+          <div class="p-card__logo">
+            <img loading="lazy" src="https://alqawsangroup.com/wp-content/uploads/2026/02/sibonicc.png" alt="SIBIONICS Logo">
+          </div>
+          <div class="p-card__name">SIBIONICS</div>
+          <div class="p-card__country">Singapore</div>
+        </div>
+
+        <!-- 16. DORCAS -->
+        <div class="p-card" data-region="tunisia"
+          data-name="DORCAS"
+          data-flag="🇹🇳" data-country="Tunisia (Sousse)"
+          data-desc="Tunisian lab specializing in sterile medicines. Liquid injectables and eye drops. Tunisian GMP. 50+ marketing authorizations. Strong African export presence."
+          data-url="https://www.dorcas.tn">
+          <span class="p-card__flag">🇹🇳</span>
+          <div class="p-card__logo">
+            <img loading="lazy" src="https://alqawsangroup.com/wp-content/uploads/2020/02/dorcas.jpg" alt="DORCAS Logo">
+          </div>
+          <div class="p-card__name">DORCAS</div>
+          <div class="p-card__country">Tunisia</div>
+        </div>
+
+        <!-- 17. UNIMED -->
+        <div class="p-card" data-region="tunisia"
+          data-name="Les Laboratoires UNIMED"
+          data-flag="🇹🇳" data-country="Tunisia (Tunis)"
+          data-desc="Les Laboratoires UNIMED is one of Tunisia's leading pharmaceutical manufacturers, specializing in the production of generic and branded medicines including injectables, ophthalmic solutions, and solid dosage forms. With over 200 registered products across 16+ countries spanning North Africa, the Middle East, and Sub-Saharan Africa, UNIMED operates to international GMP standards and holds multiple certifications. Their extensive export network and regulatory expertise make them a strategic partner for pharmaceutical distribution across the MENA region."
+          data-url="https://www.unimed.com.tn/fr/">
+          <span class="p-card__flag">🇹🇳</span>
+          <div class="p-card__logo">
+            <img loading="lazy" src="https://www.unimed.com.tn/wp-content/uploads/2021/02/logo-unimed.png" alt="UNIMED Logo">
+          </div>
+          <div class="p-card__name">UNIMED</div>
+          <div class="p-card__country">Tunisia</div>
+        </div>
+
+        <!-- 18. Carolina Pharma -->
+        <div class="p-card" data-region="turkey"
+          data-name="Carolina Pharma"
+          data-flag="🇹🇷" data-country="Turkey (Mersin)"
+          data-desc="Carolina Pharma, founded in 2015 by medical and pharmaceutical experts, is a pharmaceutical company located in the Mersin Free Economic Zone, Turkey. A pioneer in the region, it produces prescription drugs, dietary supplements, and other specialized pharmaceutical products. Its GMP-certified facility is equipped with state-of-the-art technology to ensure high-quality products."
+          data-url="https://www.carolina-pharma.com/">
+          <span class="p-card__flag">🇹🇷</span>
+          <div class="p-card__logo">
+            <img loading="lazy" src="assets/images/logos/carolina-pharma-logo.png" alt="Carolina Pharma Logo">
+          </div>
+          <div class="p-card__name">Carolina Pharma</div>
+          <div class="p-card__country">Turkey</div>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- Partner Modal -->
+  <div class="partner-modal-overlay" id="partnerModal">
+    <div class="partner-modal" id="partnerModalInner">
+      <button class="partner-modal__close" id="modalClose">&times;</button>
+      <div class="partner-modal__logo"><img loading="lazy" src="" alt=""></div>
+      <h3 id="modalTitle"></h3>
+      <div class="partner-modal__country" id="modalCountry"></div>
+      <p id="modalDesc"></p>
+      <a id="modalLink" class="btn btn--outline btn--small partner-modal__link" href="about:blank" target="_blank" rel="noopener noreferrer">
+        Visit Website <span class="arrow">→</span>
+      </a>
+    </div>
+  </div>
+
+  <!-- CTA -->
+  <section class="cta-banner">
+    <div class="container reveal">
+      <span class="overline" style="display: block; margin-bottom: var(--space-sm);">Become a Partner</span>
+      <h2>Join Our Global Network</h2>
+      <p>We're always looking for new pharmaceutical partners. If you're a manufacturer with quality products, let's explore opportunities together.</p>
+      <a href="contact.html" class="btn btn--primary">Get In Touch <span class="arrow">→</span></a>
+    </div>
+  </section>
+
+  <!-- Scroll to Top -->
+  <button class="scroll-top" aria-label="Scroll to top">
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="18 15 12 9 6 15"/></svg>
+  </button>
+
+  <!-- Footer -->
+  <footer class="footer">
+    <div class="container">
+      <div class="footer__grid">
+        <div class="footer__brand">
+          <a href="index.html" class="nav__logo" style="margin-bottom: var(--space-md);"><span class="logo-accent">DAMO</span>&nbsp;Group</a>
+          <p>A global pharmaceutical group connecting Swiss quality standards with regional healthcare needs across the Middle East.</p>
+        </div>
+        <div>
+          <div class="footer__title" data-i18n="footer.quicklinks">Quick Links</div>
+          <div class="footer__links">
+            <a href="index.html" data-i18n="nav.home">Home</a><a href="partners.html">Global Partners</a><a href="government.html" data-i18n="nav.gov">Gov. Partnerships</a><a href="news.html" data-i18n="nav.news">News</a><a href="contact.html">Contact Us</a>
+          </div>
+        </div>
+        <div>
+          <div class="footer__title" data-i18n="footer.entities">Our Entities</div>
+          <div class="footer__links">
+            <a href="alqawsan.html">Al-Qawsan Group</a><a href="cas-development.html">CAS Development SA</a><a href="damo-manufacturing.html" data-i18n="nav.damo">DAMO Manufacturing</a>
+          </div>
+        </div>
+        <div>
+          <div class="footer__title" data-i18n="footer.contact">Contact</div>
+          <div class="footer__contact-item"><i data-lucide="map-pin" style="width: 18px; height: 18px;"></i><span>Route de Saint-Georges 55,<br>1213 Petit-Lancy, Switzerland</span></div>
+          <div class="footer__contact-item"><i data-lucide="mail" style="width: 18px; height: 18px;"></i><span>contact@casdev.ch</span></div>
+        </div>
+      </div>
+      <div class="footer__bottom"><p>&copy; 2026 DAMO Group. All rights reserved.</p></div>
+    </div>
+  </footer>
+
+  <script src="js/translations.js"></script>
+  <script src="js/main.js"></script>
+  <script>
+    lucide.createIcons();
+
+    /* ═══════════════════════════════════════════
+       LEAFLET MAP — Real lat/lng coordinates
+       ═══════════════════════════════════════════ */
+    (function() {
+      // Init map (centered on Middle East, zoom 2)
+      const map = L.map('partnerMap', {
+        center: [25, 35],
+        zoom: 2,
+        minZoom: 2,
+        maxZoom: 5,
+        zoomControl: false,
+        scrollWheelZoom: false,
+        dragging: true,
+        doubleClickZoom: false
+      });
+
+      // Dark tile layer (CartoDB Dark Matter)
+      L.tileLayer('https://{s}.basemaps.cartocdn.com/dark_nolabels/{z}/{x}/{y}{r}.png', {
+        subdomains: 'abcd',
+        maxZoom: 19
+      }).addTo(map);
+
+      // Partner locations — centered on geographic center of each country
+      const locations = [
+        { lat: 33.3,  lng: 44.4,  label: '🇮🇶 Iraq — Hub', hub: true, region: 'iraq' },
+        { lat: 26.8,  lng: 30.8,  label: '🇪🇬 Egypt', region: 'egypt' },
+        { lat: 22.5,  lng: 78.9,  label: '🇮🇳 India', region: 'india' },
+        { lat: 40.4,  lng: -3.7,  label: '🇪🇸 Spain', region: 'spain' },
+        { lat: 39.8,  lng: -98.6, label: '🇺🇸 USA', region: 'usa' },
+        { lat: 56.1,  lng: -106.3,label: '🇨🇦 Canada', region: 'canada' },
+        { lat: 1.35,  lng: 103.8, label: '🇸🇬 Singapore', region: 'singapore' },
+        { lat: 34.0,  lng: 9.5,   label: '🇹🇳 Tunisia', region: 'tunisia' },
+        { lat: 36.8,  lng: 34.6,  label: '🇹🇷 Turkey', region: 'turkey' }
+      ];
+
+      // Draw connection lines from Iraq hub
+      const iraqCoords = [33.3, 44.4];
+      locations.forEach(loc => {
+        if (!loc.hub) {
+          L.polyline([iraqCoords, [loc.lat, loc.lng]], {
+            color: 'rgba(212, 168, 83, 0.15)',
+            weight: 1,
+            dashArray: '5 4'
+          }).addTo(map);
+        }
+      });
+
+      // Build popup HTML by collecting partner data from cards
+      function buildPopupContent(loc) {
+        const cards = document.querySelectorAll(`.p-card[data-region="${loc.region}"]`);
+        let html = `<strong>${loc.label}</strong>`;
+        if (cards.length > 0) {
+          html += `<div class="popup-partners">`;
+          cards.forEach(card => {
+            const logo = card.querySelector('.p-card__logo img')?.src || '';
+            const name = card.querySelector('.p-card__name')?.textContent || '';
+            html += `<div class="popup-partner"><img loading="lazy" src="${logo}" alt=""><span>${name}</span></div>`;
+          });
+          html += `</div>`;
+        }
+        return html;
+      }
+
+      // Add markers
+      locations.forEach(loc => {
+        const markerDiv = L.divIcon({
+          className: '',
+          html: `<div class="map-marker${loc.hub ? ' map-marker--hub' : ''}"></div>`,
+          iconSize: [loc.hub ? 16 : 14, loc.hub ? 16 : 14],
+          iconAnchor: [loc.hub ? 8 : 7, loc.hub ? 8 : 7]
+        });
+
+        const marker = L.marker([loc.lat, loc.lng], { icon: markerDiv }).addTo(map);
+        marker.bindPopup(() => buildPopupContent(loc), {
+          closeButton: true,
+          offset: [0, -5],
+          maxWidth: 260,
+          minWidth: 200
+        });
+      });
+    })();
+
+    /* ═══════════════════════════════════════════
+       PARTNER MODAL — Clean implementation
+       ═══════════════════════════════════════════ */
+    (function() {
+      const overlay = document.getElementById('partnerModal');
+      const modalInner = document.getElementById('partnerModalInner');
+      const closeBtn = document.getElementById('modalClose');
+      const modalTitle = document.getElementById('modalTitle');
+      const modalCountry = document.getElementById('modalCountry');
+      const modalDesc = document.getElementById('modalDesc');
+      const modalLink = document.getElementById('modalLink');
+      const modalLogo = overlay.querySelector('.partner-modal__logo img');
+
+      function openModal(card) {
+        const name = card.dataset.name;
+        const flag = card.dataset.flag;
+        const country = card.dataset.country;
+        const desc = card.dataset.desc;
+        const url = card.dataset.url;
+        const logoSrc = card.querySelector('.p-card__logo img')?.src || '';
+
+        modalLogo.src = logoSrc;
+        modalLogo.alt = name;
+        modalTitle.textContent = name;
+        modalCountry.textContent = flag + ' ' + country;
+        modalDesc.textContent = desc;
+
+        // Set Visit Website link
+        if (url) {
+          modalLink.href = url;
+          modalLink.style.display = 'inline-flex';
+        } else {
+          modalLink.style.display = 'none';
+        }
+
+        overlay.classList.add('open');
+        document.body.style.overflow = 'hidden';
+      }
+
+      function closeModal() {
+        overlay.classList.remove('open');
+        document.body.style.overflow = '';
+      }
+
+      // Card click → open modal
+      document.querySelectorAll('.p-card').forEach(card => {
+        card.addEventListener('click', (e) => {
+          // Don't open modal if clicking the Visit Website link inside
+          if (e.target.closest('.partner-modal__link')) return;
+          openModal(card);
+        });
+      });
+
+      // Close modal
+      closeBtn.addEventListener('click', (e) => {
+        e.stopPropagation();
+        closeModal();
+      });
+
+      // Close on overlay click (but not on modal content or link)
+      overlay.addEventListener('click', (e) => {
+        if (e.target === overlay) closeModal();
+      });
+
+      // Close on Escape
+      document.addEventListener('keydown', (e) => {
+        if (e.key === 'Escape') closeModal();
+      });
+
+      // Visit Website — direct window.open to guarantee new tab
+      modalLink.addEventListener('click', (e) => {
+        e.preventDefault();
+        e.stopPropagation();
+        const url = modalLink.href;
+        if (url && url !== 'about:blank' && url !== '#') {
+          window.open(url, '_blank', 'noopener,noreferrer');
+        }
+      });
+    })();
+
+    /* ═══════════════════════════════════════════
+       FILTER BUTTONS
+       ═══════════════════════════════════════════ */
+    document.querySelectorAll('.filter-bar__btn').forEach(btn => {
+      btn.addEventListener('click', () => {
+        document.querySelectorAll('.filter-bar__btn').forEach(b => b.classList.remove('active'));
+        btn.classList.add('active');
+        const filter = btn.dataset.filter;
+        document.querySelectorAll('.p-card').forEach(card => {
+          if (filter === 'all' || card.dataset.region === filter) {
+            card.style.display = '';
+            card.style.animation = 'scale-in 0.3s ease forwards';
+          } else {
+            card.style.display = 'none';
+          }
+        });
+      });
+    });
+  </script>
+</body>
+</html>

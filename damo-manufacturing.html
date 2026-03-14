@@ -1,0 +1,328 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>DAMO Manufacturing — Modern Pharmaceutical Production in Iraq</title>
+  <meta name="description" content="DAMO Manufacturing: A state-of-the-art pharmaceutical production facility in the heart of Baghdad, Iraq. GMP-certified manufacturing of generics, injectables, and sterile products.">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Outfit:wght@600;700&display=swap" rel="stylesheet">
+  <link rel="icon" type="image/png" href="assets/images/logos/damo-manufacturing-logo.png">
+  <link rel="stylesheet" href="css/variables.css">
+  <link rel="stylesheet" href="css/base.css">
+  <link rel="stylesheet" href="css/components.css">
+  <link rel="stylesheet" href="css/animations.css">
+  <link rel="stylesheet" href="css/rtl.css">
+  <script src="https://unpkg.com/lucide@latest/dist/umd/lucide.js"></script>
+  <style>
+    /* ── DAMO Manufacturing custom styles ── */
+    .mfg-intro {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: var(--space-2xl);
+      align-items: center;
+    }
+    @media (max-width: 900px) { .mfg-intro { grid-template-columns: 1fr; } }
+
+    .mfg-intro__logo {
+      max-width: 280px;
+      margin: 0 auto;
+      border-radius: var(--radius-xl);
+      overflow: hidden;
+      box-shadow: var(--shadow-card);
+    }
+    .mfg-intro__logo img {
+      width: 100%;
+      height: auto;
+      display: block;
+    }
+
+    .mfg-intro__text h2 {
+      margin-bottom: var(--space-md);
+    }
+    .mfg-intro__text p {
+      color: var(--text-secondary);
+      line-height: 1.9;
+      font-size: 1.0625rem;
+      margin-bottom: var(--space-md);
+    }
+
+    /* Video section */
+    .video-section { padding: 0; }
+    .video-wrapper {
+      width: 100%;
+      overflow: hidden;
+      background: #000;
+      line-height: 0;
+    }
+    .video-wrapper video {
+      width: 100%;
+      display: block;
+    }
+
+    /* Capabilities grid */
+    .cap-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: var(--space-lg);
+    }
+    @media (max-width: 900px) { .cap-grid { grid-template-columns: repeat(2, 1fr); } }
+    @media (max-width: 600px) { .cap-grid { grid-template-columns: 1fr; } }
+
+    .cap-card {
+      padding: var(--space-xl);
+      text-align: center;
+    }
+    .cap-card__icon {
+      width: 64px; height: 64px;
+      margin: 0 auto var(--space-md);
+      display: flex; align-items: center; justify-content: center;
+      border-radius: var(--radius-lg);
+      background: rgba(0, 180, 216, 0.1);
+      border: 1px solid rgba(0, 180, 216, 0.2);
+      transition: all var(--transition-base);
+    }
+    .cap-card:hover .cap-card__icon {
+      background: rgba(0, 180, 216, 0.2);
+      border-color: var(--accent-turquoise);
+      box-shadow: var(--shadow-turquoise-glow);
+      transform: scale(1.08);
+    }
+    .cap-card h3 { font-size: 1rem; margin-bottom: var(--space-xs); }
+    .cap-card p { color: var(--text-muted); font-size: var(--fs-small); line-height: 1.6; }
+
+    /* Key figures */
+    .key-figures {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: var(--space-lg);
+    }
+    @media (max-width: 768px) { .key-figures { grid-template-columns: repeat(2, 1fr); } }
+    .key-figure {
+      text-align: center;
+      padding: var(--space-xl) var(--space-md);
+    }
+    .key-figure__number {
+      font-family: var(--font-heading);
+      font-size: 2.5rem;
+      font-weight: var(--fw-bold);
+      color: var(--accent-gold);
+      line-height: 1;
+      margin-bottom: var(--space-xs);
+    }
+    .key-figure__label {
+      color: var(--text-muted);
+      font-size: var(--fs-small);
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Navigation -->
+  <nav class="nav" id="nav">
+    <div class="nav__inner">
+      <a href="index.html" class="nav__logo"><span class="logo-accent">DAMO</span>&nbsp;Group</a>
+      <div class="nav__links" id="navLinks">
+        <a href="index.html" data-i18n="nav.home">Home</a>
+        <a href="alqawsan.html" data-i18n="nav.alqawsan">Al-Qawsan</a>
+        <a href="cas-development.html" data-i18n="nav.cas">CAS Development</a>
+        <a href="damo-manufacturing.html" data-i18n="nav.damo">DAMO Manufacturing</a>
+        <a href="partners.html" data-i18n="nav.partners">Partners</a>
+        <a href="government.html" data-i18n="nav.gov">Gov. Partnerships</a>
+        <a href="contact.html" data-i18n="nav.contact">Contact</a>
+        <a href="news.html" data-i18n="nav.news">News</a>
+      </div>
+      <button id="langToggle" class="nav__lang-toggle" onclick="toggleLanguage()">عربي</button>
+      <button id="themeToggle" class="nav__theme-toggle" onclick="toggleTheme()" aria-label="Toggle theme" title="Toggle light/dark mode"></button>
+      <button class="nav__toggle" id="navToggle" aria-label="Toggle menu"><span></span><span></span><span></span></button>
+    </div>
+  </nav>
+  <div class="nav__overlay" id="navOverlay"></div>
+
+  <!-- Page Hero -->
+  <section class="page-hero">
+    <div class="hero__bg">
+      <div class="particle particle--1"></div>
+      <div class="particle particle--2"></div>
+    </div>
+    <div class="hero__overlay"></div>
+    <div class="page-hero__content">
+      <span class="overline">DAMO Group Entity</span>
+      <h1>DAMO <span class="highlight">Manufacturing</span></h1>
+      <p>A state-of-the-art pharmaceutical production facility in the heart of Baghdad, Iraq — pioneering local manufacturing for the region.</p>
+    </div>
+  </section>
+
+  <!-- About the Factory -->
+  <section style="background: var(--bg-secondary);">
+    <div class="container">
+      <div class="mfg-intro reveal">
+        <div class="mfg-intro__logo">
+          <img src="assets/images/logos/damo-manufacturing-logo.png" alt="DAMO Manufacturing Logo">
+        </div>
+        <div class="mfg-intro__text">
+          <span class="overline" style="display: block; margin-bottom: var(--space-sm);">About the Facility</span>
+          <h2>Pioneering Pharmaceutical <span style="color: var(--accent-gold);">Production</span> in Iraq</h2>
+          <p>
+            DAMO Manufacturing stands as a landmark investment in Iraq's pharmaceutical future. Located in the heart of Baghdad, our facility is designed to meet the highest international standards of pharmaceutical production — bringing world-class manufacturing capabilities to the region for the first time.
+          </p>
+          <p>
+            Engineered with cutting-edge technology and built to comply with <strong style="color: var(--text-primary);">Good Manufacturing Practice (GMP)</strong> guidelines, the plant represents a new era of self-reliant pharmaceutical production in Iraq. From solid dosage forms to sterile injectables, our production lines are built to serve the diverse healthcare needs of the Iraqi population and the broader Middle Eastern market.
+          </p>
+          <p>
+            With a dedicated team of pharmacists, engineers, and quality assurance specialists, DAMO Manufacturing is committed to producing <strong style="color: var(--accent-turquoise);">safe, effective, and affordable</strong> medicines — reducing dependence on imports and strengthening Iraq's healthcare infrastructure from within.
+          </p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Factory Video -->
+  <section class="video-section">
+    <div class="container">
+      <div class="section-header reveal">
+        <span class="overline">Inside the Facility</span>
+        <h2>See Our Factory in Action</h2>
+        <p>Take a virtual tour of our pharmaceutical production facility.</p>
+      </div>
+    </div>
+    <div class="video-wrapper reveal">
+      <video controls playsinline preload="metadata" poster="">
+        <source src="assets/videos/VIDEO-2025-07-12-13-48-22.mp4" type="video/mp4">
+        Your browser does not support the video tag.
+      </video>
+    </div>
+  </section>
+
+  <!-- Key Figures -->
+  <section style="background: var(--bg-secondary); border-top: 1px solid var(--border-glass); border-bottom: 1px solid var(--border-glass);">
+    <div class="container">
+      <div class="key-figures stagger-reveal">
+        <div class="key-figure glass-card">
+          <div class="key-figure__number">GMP</div>
+          <div class="key-figure__label">Certified Facility</div>
+        </div>
+        <div class="key-figure glass-card">
+          <div class="key-figure__number">200M+</div>
+          <div class="key-figure__label">Annual Unit Capacity</div>
+        </div>
+        <div class="key-figure glass-card">
+          <div class="key-figure__number">50+</div>
+          <div class="key-figure__label">Product Lines</div>
+        </div>
+        <div class="key-figure glass-card">
+          <div class="key-figure__number">24/7</div>
+          <div class="key-figure__label">Quality Monitoring</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Manufacturing Capabilities -->
+  <section>
+    <div class="container">
+      <div class="section-header reveal">
+        <span class="overline">Our Capabilities</span>
+        <h2>What We Produce</h2>
+        <p>A comprehensive range of pharmaceutical products manufactured to the highest quality standards.</p>
+      </div>
+      <div class="cap-grid stagger-reveal">
+        <div class="glass-card cap-card">
+          <div class="cap-card__icon">
+            <i data-lucide="pill" style="width: 28px; height: 28px; color: var(--accent-turquoise);"></i>
+          </div>
+          <h3>Solid Dosage Forms</h3>
+          <p>Tablets, capsules, and coated pills across multiple therapeutic categories including cardiovascular, CNS, and metabolic disorders.</p>
+        </div>
+        <div class="glass-card cap-card">
+          <div class="cap-card__icon">
+            <i data-lucide="syringe" style="width: 28px; height: 28px; color: var(--accent-turquoise);"></i>
+          </div>
+          <h3>Injectable Solutions</h3>
+          <p>Sterile ampoules and vials produced in ISO Class 5 clean rooms with automated filling and sealing systems.</p>
+        </div>
+        <div class="glass-card cap-card">
+          <div class="cap-card__icon">
+            <i data-lucide="droplet" style="width: 28px; height: 28px; color: var(--accent-turquoise);"></i>
+          </div>
+          <h3>Liquid Formulations</h3>
+          <p>Syrups, suspensions, and oral solutions with precision mixing and automated bottling lines.</p>
+        </div>
+        <div class="glass-card cap-card">
+          <div class="cap-card__icon">
+            <i data-lucide="shield-check" style="width: 28px; height: 28px; color: var(--accent-turquoise);"></i>
+          </div>
+          <h3>Quality Control Lab</h3>
+          <p>Full analytical laboratory with HPLC, dissolution testing, and stability chambers for rigorous batch validation.</p>
+        </div>
+        <div class="glass-card cap-card">
+          <div class="cap-card__icon">
+            <i data-lucide="thermometer" style="width: 28px; height: 28px; color: var(--accent-turquoise);"></i>
+          </div>
+          <h3>Cold Chain Products</h3>
+          <p>Temperature-controlled manufacturing and storage facilities for sensitive biologics and vaccines.</p>
+        </div>
+        <div class="glass-card cap-card">
+          <div class="cap-card__icon">
+            <i data-lucide="package" style="width: 28px; height: 28px; color: var(--accent-turquoise);"></i>
+          </div>
+          <h3>Packaging & Labeling</h3>
+          <p>Automated blister packaging, carton labeling, and serialization for full traceability compliance.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- CTA -->
+  <section class="cta-banner">
+    <div class="container reveal">
+      <span class="overline" style="display: block; margin-bottom: var(--space-sm);">Partnerships & Inquiries</span>
+      <h2>Interested in Local Manufacturing?</h2>
+      <p>Whether you're a pharmaceutical company seeking regional production or a healthcare institution in need of locally manufactured medicines, we'd love to discuss collaboration opportunities.</p>
+      <a href="contact.html" class="btn btn--primary">Contact Our Team <span class="arrow">→</span></a>
+    </div>
+  </section>
+
+  <!-- Scroll to Top -->
+  <button class="scroll-top" aria-label="Scroll to top">
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="18 15 12 9 6 15"/></svg>
+  </button>
+
+  <!-- Footer -->
+  <footer class="footer">
+    <div class="container">
+      <div class="footer__grid">
+        <div class="footer__brand">
+          <a href="index.html" class="nav__logo" style="margin-bottom: var(--space-md);"><span class="logo-accent">DAMO</span>&nbsp;Group</a>
+          <p>A global pharmaceutical group connecting Swiss quality standards with regional healthcare needs across the Middle East.</p>
+        </div>
+        <div>
+          <div class="footer__title" data-i18n="footer.quicklinks">Quick Links</div>
+          <div class="footer__links">
+            <a href="index.html" data-i18n="nav.home">Home</a><a href="partners.html">Global Partners</a><a href="government.html" data-i18n="nav.gov">Gov. Partnerships</a><a href="news.html" data-i18n="nav.news">News</a><a href="contact.html">Contact Us</a>
+          </div>
+        </div>
+        <div>
+          <div class="footer__title" data-i18n="footer.entities">Our Entities</div>
+          <div class="footer__links">
+            <a href="alqawsan.html">Al-Qawsan Group</a><a href="cas-development.html">CAS Development SA</a><a href="damo-manufacturing.html" data-i18n="nav.damo">DAMO Manufacturing</a>
+          </div>
+        </div>
+        <div>
+          <div class="footer__title" data-i18n="footer.contact">Contact</div>
+          <div class="footer__contact-item"><i data-lucide="map-pin" style="width: 18px; height: 18px;"></i><span>Route de Saint-Georges 55,<br>1213 Petit-Lancy, Switzerland</span></div>
+          <div class="footer__contact-item"><i data-lucide="mail" style="width: 18px; height: 18px;"></i><span>contact@casdev.ch</span></div>
+        </div>
+      </div>
+      <div class="footer__bottom"><p>&copy; 2026 DAMO Group. All rights reserved.</p></div>
+    </div>
+  </footer>
+
+  <script src="js/translations.js"></script>
+  <script src="js/main.js"></script>
+  <script>lucide.createIcons();</script>
+</body>
+</html>

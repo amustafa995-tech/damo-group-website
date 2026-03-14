@@ -1,0 +1,185 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>CAS Development SA — DAMO Group</title>
+  <meta name="description" content="CAS Development SA — Swiss Marketing Authorization Holder. Product selection, quality verification to Swiss standards, and AMM management.">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Outfit:wght@600;700&display=swap" rel="stylesheet">
+  <link rel="icon" type="image/png" href="assets/images/logos/damo-manufacturing-logo.png">
+  <link rel="stylesheet" href="css/variables.css">
+  <link rel="stylesheet" href="css/base.css">
+  <link rel="stylesheet" href="css/components.css">
+  <link rel="stylesheet" href="css/animations.css">
+  <link rel="stylesheet" href="css/rtl.css">
+  <script src="https://unpkg.com/lucide@latest/dist/umd/lucide.js"></script>
+</head>
+<body>
+
+  <!-- Navigation -->
+  <nav class="nav" id="nav">
+    <div class="nav__inner">
+      <a href="index.html" class="nav__logo"><span class="logo-accent">DAMO</span>&nbsp;Group</a>
+      <div class="nav__links" id="navLinks">
+        <a href="index.html" data-i18n="nav.home">Home</a>
+        <a href="alqawsan.html" data-i18n="nav.alqawsan">Al-Qawsan</a>
+        <a href="cas-development.html" data-i18n="nav.cas">CAS Development</a>
+        <a href="damo-manufacturing.html" data-i18n="nav.damo">DAMO Manufacturing</a>
+        <a href="partners.html" data-i18n="nav.partners">Partners</a>
+        <a href="government.html" data-i18n="nav.gov">Gov. Partnerships</a>
+        <a href="contact.html" data-i18n="nav.contact">Contact</a>
+        <a href="news.html" data-i18n="nav.news">News</a>
+      </div>
+      <button id="langToggle" class="nav__lang-toggle" onclick="toggleLanguage()">عربي</button>
+      <button id="themeToggle" class="nav__theme-toggle" onclick="toggleTheme()" aria-label="Toggle theme" title="Toggle light/dark mode"></button>
+      <button class="nav__toggle" id="navToggle" aria-label="Toggle menu"><span></span><span></span><span></span></button>
+    </div>
+  </nav>
+  <div class="nav__overlay" id="navOverlay"></div>
+
+  <!-- Page Hero -->
+  <section class="page-hero">
+    <div class="hero__bg">
+      <div class="particle particle--1"></div>
+      <div class="particle particle--2"></div>
+    </div>
+    <div class="hero__overlay"></div>
+    <div class="page-hero__content">
+      <span class="overline">DAMO Group — Quality & Regulatory</span>
+      <h1>CAS Development <span class="highlight">SA</span></h1>
+      <p>Swiss Quality, Global Impact — Marketing Authorization Holder ensuring the highest pharmaceutical standards.</p>
+    </div>
+  </section>
+
+  <!-- Role -->
+  <section style="background: var(--bg-secondary);">
+    <div class="container">
+      <div class="grid grid--2 reveal" style="gap: var(--space-3xl); align-items: center;">
+        <div>
+          <span class="overline" style="display: block; margin-bottom: var(--space-sm);">Our Role</span>
+          <h2 style="margin-bottom: var(--space-lg);">Marketing Authorization Holder</h2>
+          <p style="line-height: 1.9;">
+            CAS Development SA, based in <strong style="color: var(--text-primary);">Geneva, Switzerland</strong>, serves as the <strong style="color: var(--accent-turquoise);">Marketing Authorization Holder (MAH)</strong> within the DAMO Group ecosystem.
+          </p>
+          <p style="line-height: 1.9;">
+            Our primary mission is to ensure that every pharmaceutical product distributed through our network meets the <strong style="color: var(--text-primary);">highest Swiss quality standards</strong>. We are responsible for the acquisition, management, and exploitation of Market Authorizations (AMM) for the commercial trading, distribution, and import/export of pharmaceutical products.
+          </p>
+          <p style="line-height: 1.9;">
+            By bridging the regulatory gap between international manufacturers and the Iraqi market, CAS Development SA acts as the quality gateway — ensuring patient safety through rigorous product evaluation and compliance verification.
+          </p>
+        </div>
+        <div style="display: flex; flex-direction: column; gap: var(--space-md);">
+          <div class="glass-card" style="padding: var(--space-lg);">
+            <div style="display: flex; align-items: center; gap: var(--space-md); margin-bottom: var(--space-sm);">
+              <i data-lucide="search" style="width: 24px; height: 24px; color: var(--accent-turquoise); flex-shrink: 0;"></i>
+              <strong style="color: var(--text-primary);">Product Scouting</strong>
+            </div>
+            <p style="color: var(--text-muted); font-size: var(--fs-small); margin: 0;">Identification and evaluation of innovative pharmaceutical products from global manufacturers for introduction into the Iraqi market.</p>
+          </div>
+          <div class="glass-card" style="padding: var(--space-lg);">
+            <div style="display: flex; align-items: center; gap: var(--space-md); margin-bottom: var(--space-sm);">
+              <i data-lucide="shield-check" style="width: 24px; height: 24px; color: var(--accent-turquoise); flex-shrink: 0;"></i>
+              <strong style="color: var(--text-primary);">Quality Assurance</strong>
+            </div>
+            <p style="color: var(--text-muted); font-size: var(--fs-small); margin: 0;">Rigorous verification of manufacturing processes, GMP compliance, and product quality against Swiss pharmaceutical standards.</p>
+          </div>
+          <div class="glass-card" style="padding: var(--space-lg);">
+            <div style="display: flex; align-items: center; gap: var(--space-md); margin-bottom: var(--space-sm);">
+              <i data-lucide="file-check" style="width: 24px; height: 24px; color: var(--accent-turquoise); flex-shrink: 0;"></i>
+              <strong style="color: var(--text-primary);">Regulatory Affairs</strong>
+            </div>
+            <p style="color: var(--text-muted); font-size: var(--fs-small); margin: 0;">AMM acquisition and management, ensuring full regulatory compliance for international pharmaceutical trade.</p>
+          </div>
+          <div class="glass-card" style="padding: var(--space-lg);">
+            <div style="display: flex; align-items: center; gap: var(--space-md); margin-bottom: var(--space-sm);">
+              <i data-lucide="globe" style="width: 24px; height: 24px; color: var(--accent-turquoise); flex-shrink: 0;"></i>
+              <strong style="color: var(--text-primary);">International Trade</strong>
+            </div>
+            <p style="color: var(--text-muted); font-size: var(--fs-small); margin: 0;">Facilitating the import and export of medical devices, pharmaceutical preparations, cosmetics, and health supplements.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+
+  <!-- Scope -->
+  <section style="background: var(--bg-secondary);">
+    <div class="container">
+      <div class="section-header reveal">
+        <span class="overline">Scope of Activity</span>
+        <h2>What We Cover</h2>
+      </div>
+
+      <div class="grid grid--3 stagger-reveal">
+        <div class="glass-card" style="padding: var(--space-xl); text-align: center;">
+          <i data-lucide="pill" style="width: 40px; height: 40px; color: var(--accent-gold); margin-bottom: var(--space-md);"></i>
+          <h3 style="margin-bottom: var(--space-xs);">Pharmaceutical Products</h3>
+          <p style="color: var(--text-muted); font-size: var(--fs-small); margin: 0;">Chemical, natural, and synthetic preparations meeting international pharmacopoeia standards.</p>
+        </div>
+        <div class="glass-card" style="padding: var(--space-xl); text-align: center;">
+          <i data-lucide="stethoscope" style="width: 40px; height: 40px; color: var(--accent-gold); margin-bottom: var(--space-md);"></i>
+          <h3 style="margin-bottom: var(--space-xs);">Medical Devices</h3>
+          <p style="color: var(--text-muted); font-size: var(--fs-small); margin: 0;">Apparatus, instruments, and medical supplies for healthcare facilities and professionals.</p>
+        </div>
+        <div class="glass-card" style="padding: var(--space-xl); text-align: center;">
+          <i data-lucide="heart-pulse" style="width: 40px; height: 40px; color: var(--accent-gold); margin-bottom: var(--space-md);"></i>
+          <h3 style="margin-bottom: var(--space-xs);">Health & Wellness</h3>
+          <p style="color: var(--text-muted); font-size: var(--fs-small); margin: 0;">Food supplements, cosmetics, and wellness products meeting Swiss quality standards.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- CTA -->
+  <section class="cta-banner">
+    <div class="container reveal">
+      <span class="overline" style="display: block; margin-bottom: var(--space-sm);">Partner With Us</span>
+      <h2>Looking for a Swiss Quality Partner?</h2>
+      <p>If you're a pharmaceutical manufacturer seeking a reliable Marketing Authorization Holder in Switzerland, let's discuss how we can work together.</p>
+      <a href="contact.html" class="btn btn--primary">Contact CAS Development <span class="arrow">→</span></a>
+    </div>
+  </section>
+
+  <!-- Scroll to Top -->
+  <button class="scroll-top" aria-label="Scroll to top">
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="18 15 12 9 6 15"/></svg>
+  </button>
+
+  <!-- Footer -->
+  <footer class="footer">
+    <div class="container">
+      <div class="footer__grid">
+        <div class="footer__brand">
+          <a href="index.html" class="nav__logo" style="margin-bottom: var(--space-md);"><span class="logo-accent">DAMO</span>&nbsp;Group</a>
+          <p>A global pharmaceutical group connecting Swiss quality standards with regional healthcare needs across the Middle East.</p>
+        </div>
+        <div>
+          <div class="footer__title" data-i18n="footer.quicklinks">Quick Links</div>
+          <div class="footer__links">
+            <a href="index.html" data-i18n="nav.home">Home</a><a href="partners.html">Global Partners</a><a href="government.html" data-i18n="nav.gov">Gov. Partnerships</a><a href="news.html" data-i18n="nav.news">News</a><a href="contact.html">Contact Us</a>
+          </div>
+        </div>
+        <div>
+          <div class="footer__title" data-i18n="footer.entities">Our Entities</div>
+          <div class="footer__links">
+            <a href="alqawsan.html">Al-Qawsan Group</a><a href="cas-development.html">CAS Development SA</a><a href="damo-manufacturing.html" data-i18n="nav.damo">DAMO Manufacturing</a>
+          </div>
+        </div>
+        <div>
+          <div class="footer__title" data-i18n="footer.contact">Contact</div>
+          <div class="footer__contact-item"><i data-lucide="map-pin" style="width: 18px; height: 18px;"></i><span>Route de Saint-Georges 55,<br>1213 Petit-Lancy, Switzerland</span></div>
+          <div class="footer__contact-item"><i data-lucide="mail" style="width: 18px; height: 18px;"></i><span>contact@casdev.ch</span></div>
+        </div>
+      </div>
+      <div class="footer__bottom"><p>&copy; 2026 DAMO Group. All rights reserved.</p></div>
+    </div>
+  </footer>
+
+  <script src="js/translations.js"></script>
+  <script src="js/main.js"></script>
+  <script>lucide.createIcons();</script>
+</body>
+</html>

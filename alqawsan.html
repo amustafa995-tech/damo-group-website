@@ -1,0 +1,308 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Al-Qawsan Group — DAMO Group</title>
+  <meta name="description" content="Al-Qawsan Scientific Bureau — Iraq's leading pharmaceutical distributor since 2009. Drug registration, logistics, and Ministry of Health collaboration.">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Outfit:wght@600;700&display=swap" rel="stylesheet">
+  <link rel="icon" type="image/png" href="assets/images/logos/damo-manufacturing-logo.png">
+  <link rel="stylesheet" href="css/variables.css">
+  <link rel="stylesheet" href="css/base.css">
+  <link rel="stylesheet" href="css/components.css">
+  <link rel="stylesheet" href="css/animations.css">
+  <link rel="stylesheet" href="css/rtl.css">
+  <script src="https://unpkg.com/lucide@latest/dist/umd/lucide.js"></script>
+</head>
+<body>
+
+  <!-- Navigation -->
+  <nav class="nav" id="nav">
+    <div class="nav__inner">
+      <a href="index.html" class="nav__logo"><span class="logo-accent">DAMO</span>&nbsp;Group</a>
+      <div class="nav__links" id="navLinks">
+        <a href="index.html" data-i18n="nav.home">Home</a>
+        <a href="alqawsan.html" data-i18n="nav.alqawsan">Al-Qawsan</a>
+        <a href="cas-development.html" data-i18n="nav.cas">CAS Development</a>
+        <a href="damo-manufacturing.html" data-i18n="nav.damo">DAMO Manufacturing</a>
+        <a href="partners.html" data-i18n="nav.partners">Partners</a>
+        <a href="government.html" data-i18n="nav.gov">Gov. Partnerships</a>
+        <a href="contact.html" data-i18n="nav.contact">Contact</a>
+        <a href="news.html" data-i18n="nav.news">News</a>
+      </div>
+      <button id="langToggle" class="nav__lang-toggle" onclick="toggleLanguage()">عربي</button>
+      <button id="themeToggle" class="nav__theme-toggle" onclick="toggleTheme()" aria-label="Toggle theme" title="Toggle light/dark mode"></button>
+      <button class="nav__toggle" id="navToggle" aria-label="Toggle menu"><span></span><span></span><span></span></button>
+    </div>
+  </nav>
+  <div class="nav__overlay" id="navOverlay"></div>
+
+  <!-- Page Hero -->
+  <section class="page-hero">
+    <div class="hero__bg">
+      <div class="particle particle--1"></div>
+      <div class="particle particle--2"></div>
+    </div>
+    <div class="hero__overlay"></div>
+    <div class="page-hero__content">
+      <span class="overline">DAMO Group — Distribution</span>
+      <h1>Al-Qawsan <span class="highlight">Scientific Bureau</span></h1>
+      <p>Iraq's leading pharmaceutical distributor — delivering world-class healthcare solutions since 2009.</p>
+    </div>
+  </section>
+
+  <!-- Overview -->
+  <section style="background: var(--bg-secondary);">
+    <div class="container">
+      <div class="grid grid--2 reveal" style="gap: var(--space-3xl); align-items: center;">
+        <div>
+          <span class="overline" style="display: block; margin-bottom: var(--space-sm);">About</span>
+          <h2 style="margin-bottom: var(--space-lg);">Iraq's Top 5 Pharmaceutical Distributor</h2>
+          <p style="line-height: 1.9;">
+            Established in <strong style="color: var(--text-primary);">2009 in Baghdad</strong>, Al-Qawsan Scientific Bureau has grown into one of Iraq's top five pharmaceutical distributors in the private sector.
+          </p>
+          <p style="line-height: 1.9;">
+            We provide a wide range of medical products and services, targeting healthcare professionals, pharmacies, and the public sector. Our dedication to quality and innovation drives our partnerships with global leaders, ensuring the availability of safe and effective medications across Iraq.
+          </p>
+          <p style="line-height: 1.9;">
+            With over <strong style="color: var(--text-primary);">1,500 employees</strong> spanning all Iraqi governorates, Al-Qawsan maintains a close collaboration with the <strong style="color: var(--accent-turquoise);">Iraqi Ministry of Health</strong> to address public health challenges and improve access to care.
+          </p>
+        </div>
+        <div>
+          <div class="grid grid--2" style="gap: var(--space-md);">
+            <div class="glass-card" style="padding: var(--space-lg); text-align: center;">
+              <div class="stat__number" style="font-size: 2rem;" data-counter="1500" data-suffix="+">0</div>
+              <div class="stat__label">Employees</div>
+            </div>
+            <div class="glass-card" style="padding: var(--space-lg); text-align: center;">
+              <div class="stat__number" style="font-size: 2rem;">Top 5</div>
+              <div class="stat__label">Private Distributor</div>
+            </div>
+            <div class="glass-card" style="padding: var(--space-lg); text-align: center;">
+              <div class="stat__number" style="font-size: 2rem;">18</div>
+              <div class="stat__label">Governorates</div>
+            </div>
+            <div class="glass-card" style="padding: var(--space-lg); text-align: center;">
+              <div class="stat__number" style="font-size: 2rem;">2009</div>
+              <div class="stat__label">Founded</div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Timeline -->
+  <section>
+    <div class="container">
+      <div class="section-header reveal">
+        <span class="overline">Our Journey</span>
+        <h2>Milestones</h2>
+      </div>
+
+      <div class="timeline reveal">
+        <div class="timeline__item">
+          <div class="timeline__year">2009</div>
+          <div class="timeline__text">Founded in Baghdad as Al-Qawsan Scientific Bureau, focusing on pharmaceutical distribution.</div>
+        </div>
+        <div class="timeline__item">
+          <div class="timeline__year">2014</div>
+          <div class="timeline__text">Expansion with Lara Scientific Office, specializing in nutritional supplements.</div>
+        </div>
+        <div class="timeline__item">
+          <div class="timeline__year">2019</div>
+          <div class="timeline__text">Sales doubled. Sanaya Scientific Office opened for medical supplies.</div>
+        </div>
+        <div class="timeline__item">
+          <div class="timeline__year">2020</div>
+          <div class="timeline__text">COVID-19 response — exclusive distributor of Sinopharm's vaccine in Iraq. Partnered with Ministry of Health for national vaccination campaign.</div>
+        </div>
+        <div class="timeline__item">
+          <div class="timeline__year">2022</div>
+          <div class="timeline__text">Full recovery and another peak in sales, doubling growth from 2019.</div>
+        </div>
+        <div class="timeline__item">
+          <div class="timeline__year">2025</div>
+          <div class="timeline__text">DAMO Group formation. Expanded to 20+ global pharmaceutical partners with DAMU manufacturing under construction.</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Services -->
+  <section style="background: var(--bg-secondary);">
+    <div class="container">
+      <div class="section-header reveal">
+        <span class="overline">What We Do</span>
+        <h2>Our Services</h2>
+        <p>Comprehensive pharmaceutical solutions built on over 15 years of expertise in the Iraqi market.</p>
+      </div>
+
+      <div class="grid grid--2 stagger-reveal" style="gap: var(--space-lg);">
+
+        <!-- Card 1: Drug & Factory Registration -->
+        <div class="glass-card" style="padding: var(--space-xl);">
+          <div style="display: flex; align-items: flex-start; gap: var(--space-md); margin-bottom: var(--space-md);">
+            <div style="width: 52px; height: 52px; border-radius: var(--radius-md); background: rgba(212,168,83,0.1); border: 1px solid rgba(212,168,83,0.2); display: flex; align-items: center; justify-content: center; flex-shrink: 0;">
+              <i data-lucide="file-check" style="width: 24px; height: 24px; color: var(--accent-gold);"></i>
+            </div>
+            <div>
+              <h3 style="margin-bottom: var(--space-xs);">Drug Registration & Regulatory Affairs</h3>
+              <span style="font-size: var(--fs-small); color: var(--accent-gold); font-weight: var(--fw-medium);">Core Expertise</span>
+            </div>
+          </div>
+          <p style="color: var(--text-secondary); line-height: 1.8; font-size: var(--fs-small);">
+            Our dedicated regulatory affairs team brings deep expertise in navigating Iraq's pharmaceutical registration framework. We manage the complete registration lifecycle — from pharmaceutical factory accreditation to individual product dossier submission and approval — with the Iraqi Ministry of Health. This includes preparing technical documentation, coordinating inspections, and ensuring full compliance with local regulations, enabling international manufacturers to legally distribute their products in Iraq.
+          </p>
+        </div>
+
+        <!-- Card 2: Public Sector Tenders -->
+        <div class="glass-card" style="padding: var(--space-xl);">
+          <div style="display: flex; align-items: flex-start; gap: var(--space-md); margin-bottom: var(--space-md);">
+            <div style="width: 52px; height: 52px; border-radius: var(--radius-md); background: rgba(0,180,216,0.1); border: 1px solid rgba(0,180,216,0.2); display: flex; align-items: center; justify-content: center; flex-shrink: 0;">
+              <i data-lucide="landmark" style="width: 24px; height: 24px; color: var(--accent-turquoise);"></i>
+            </div>
+            <div>
+              <h3 style="margin-bottom: var(--space-xs);">Government Tenders & Public Sector Supply</h3>
+              <span style="font-size: var(--fs-small); color: var(--accent-turquoise); font-weight: var(--fw-medium);">Ministry of Health</span>
+            </div>
+          </div>
+          <p style="color: var(--text-secondary); line-height: 1.8; font-size: var(--fs-small);">
+            Al-Qawsan works directly with Iraq's Ministry of Health to participate in public pharmaceutical tenders, supplying essential medicines and healthcare products to government hospitals and public health facilities. Our long-standing institutional relationships and proven track record position us as a trusted partner for large-scale public sector procurement across all Iraqi governorates.
+          </p>
+        </div>
+
+        <!-- Card 3: Distribution Network -->
+        <div class="glass-card" style="padding: var(--space-xl);">
+          <div style="display: flex; align-items: flex-start; gap: var(--space-md); margin-bottom: var(--space-md);">
+            <div style="width: 52px; height: 52px; border-radius: var(--radius-md); background: rgba(212,168,83,0.1); border: 1px solid rgba(212,168,83,0.2); display: flex; align-items: center; justify-content: center; flex-shrink: 0;">
+              <i data-lucide="truck" style="width: 24px; height: 24px; color: var(--accent-gold);"></i>
+            </div>
+            <div>
+              <h3 style="margin-bottom: var(--space-xs);">Nationwide Distribution Network</h3>
+              <span style="font-size: var(--fs-small); color: var(--accent-gold); font-weight: var(--fw-medium);">20+ Distribution Sites</span>
+            </div>
+          </div>
+          <p style="color: var(--text-secondary); line-height: 1.8; font-size: var(--fs-small);">
+            Built over more than 15 years, our distribution infrastructure spans the entire country with over 20 strategically located distribution sites across Iraq. Each major city is served by one or more wholesale distribution hubs, ensuring reliable and timely delivery of pharmaceutical products to pharmacies, clinics, and hospitals in both urban centres and remote areas. This nationwide reach makes Al-Qawsan one of the most comprehensive pharmaceutical supply networks operating in Iraq today.
+          </p>
+        </div>
+
+        <!-- Card 4: Import Logistics -->
+        <div class="glass-card" style="padding: var(--space-xl);">
+          <div style="display: flex; align-items: flex-start; gap: var(--space-md); margin-bottom: var(--space-md);">
+            <div style="width: 52px; height: 52px; border-radius: var(--radius-md); background: rgba(0,180,216,0.1); border: 1px solid rgba(0,180,216,0.2); display: flex; align-items: center; justify-content: center; flex-shrink: 0;">
+              <i data-lucide="ship" style="width: 24px; height: 24px; color: var(--accent-turquoise);"></i>
+            </div>
+            <div>
+              <h3 style="margin-bottom: var(--space-xs);">Import Logistics & Supply Chain</h3>
+              <span style="font-size: var(--fs-small); color: var(--accent-turquoise); font-weight: var(--fw-medium);">End-to-End Coordination</span>
+            </div>
+          </div>
+          <p style="color: var(--text-secondary); line-height: 1.8; font-size: var(--fs-small);">
+            We manage the entire import chain from international pharmaceutical manufacturers to local distribution points. Our logistics team handles customs clearance, GMP-compliant cold chain management, warehousing, and last-mile delivery — ensuring that product integrity and regulatory compliance are maintained at every stage of the supply chain.
+          </p>
+        </div>
+
+        <!-- Card 5: Pharmacovigilance & Quality -->
+        <div class="glass-card" style="padding: var(--space-xl);">
+          <div style="display: flex; align-items: flex-start; gap: var(--space-md); margin-bottom: var(--space-md);">
+            <div style="width: 52px; height: 52px; border-radius: var(--radius-md); background: rgba(212,168,83,0.1); border: 1px solid rgba(212,168,83,0.2); display: flex; align-items: center; justify-content: center; flex-shrink: 0;">
+              <i data-lucide="shield-check" style="width: 24px; height: 24px; color: var(--accent-gold);"></i>
+            </div>
+            <div>
+              <h3 style="margin-bottom: var(--space-xs);">Pharmacovigilance & Quality Assurance</h3>
+              <span style="font-size: var(--fs-small); color: var(--accent-gold); font-weight: var(--fw-medium);">Safety First</span>
+            </div>
+          </div>
+          <p style="color: var(--text-secondary); line-height: 1.8; font-size: var(--fs-small);">
+            We maintain rigorous quality assurance protocols throughout our operations, from product sourcing through final delivery. Our pharmacovigilance team monitors product safety, handles adverse event reporting, and ensures that all distributed pharmaceuticals meet the highest standards required by Iraqi health authorities and international best practices.
+          </p>
+        </div>
+
+        <!-- Card 6: Training & Development -->
+        <div class="glass-card" style="padding: var(--space-xl);">
+          <div style="display: flex; align-items: flex-start; gap: var(--space-md); margin-bottom: var(--space-md);">
+            <div style="width: 52px; height: 52px; border-radius: var(--radius-md); background: rgba(0,180,216,0.1); border: 1px solid rgba(0,180,216,0.2); display: flex; align-items: center; justify-content: center; flex-shrink: 0;">
+              <i data-lucide="graduation-cap" style="width: 24px; height: 24px; color: var(--accent-turquoise);"></i>
+            </div>
+            <div>
+              <h3 style="margin-bottom: var(--space-xs);">Healthcare Professional Training</h3>
+              <span style="font-size: var(--fs-small); color: var(--accent-turquoise); font-weight: var(--fw-medium);">Knowledge Transfer</span>
+            </div>
+          </div>
+          <p style="color: var(--text-secondary); line-height: 1.8; font-size: var(--fs-small);">
+            In partnership with the Ministry of Health and international pharmaceutical manufacturers, we organise specialised workshops, seminars, and continuing education programmes for healthcare professionals. These initiatives cover the latest treatment protocols, pharmacological advances, and product knowledge — contributing to improved patient care standards across Iraq.
+          </p>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- CTA -->
+  <section class="cta-banner">
+    <div class="container reveal">
+      <span class="overline" style="display: block; margin-bottom: var(--space-sm);">Work With Us</span>
+      <h2>Interested in the Iraqi Market?</h2>
+      <p>Whether you're a manufacturer seeking distribution or a healthcare organization looking for reliable supply, let's connect.</p>
+      <a href="contact.html" class="btn btn--primary">Contact Us <span class="arrow">→</span></a>
+    </div>
+  </section>
+
+  <!-- Scroll to Top -->
+  <button class="scroll-top" aria-label="Scroll to top">
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="18 15 12 9 6 15"/></svg>
+  </button>
+
+  <!-- Footer -->
+  <footer class="footer">
+    <div class="container">
+      <div class="footer__grid">
+        <div class="footer__brand">
+          <a href="index.html" class="nav__logo" style="margin-bottom: var(--space-md);"><span class="logo-accent">DAMO</span>&nbsp;Group</a>
+          <p>A global pharmaceutical group connecting Swiss quality standards with regional healthcare needs across the Middle East.</p>
+        </div>
+        <div>
+          <div class="footer__title" data-i18n="footer.quicklinks">Quick Links</div>
+          <div class="footer__links">
+            <a href="index.html" data-i18n="nav.home">Home</a>
+            <a href="partners.html">Global Partners</a>
+            <a href="government.html" data-i18n="nav.gov">Gov. Partnerships</a>
+            <a href="news.html" data-i18n="nav.news">News</a>
+            <a href="contact.html">Contact Us</a>
+          </div>
+        </div>
+        <div>
+          <div class="footer__title" data-i18n="footer.entities">Our Entities</div>
+          <div class="footer__links">
+            <a href="alqawsan.html">Al-Qawsan Group</a>
+            <a href="cas-development.html">CAS Development SA</a>
+            <a href="damo-manufacturing.html" data-i18n="nav.damo">DAMO Manufacturing</a>
+          </div>
+        </div>
+        <div>
+          <div class="footer__title" data-i18n="footer.contact">Contact</div>
+          <div class="footer__contact-item">
+            <i data-lucide="map-pin" style="width: 18px; height: 18px;"></i>
+            <span>Route de Saint-Georges 55,<br>1213 Petit-Lancy, Switzerland</span>
+          </div>
+          <div class="footer__contact-item">
+            <i data-lucide="mail" style="width: 18px; height: 18px;"></i>
+            <span>contact@casdev.ch</span>
+          </div>
+        </div>
+      </div>
+      <div class="footer__bottom">
+        <p>&copy; 2026 DAMO Group. All rights reserved.</p>
+      </div>
+    </div>
+  </footer>
+
+  <script src="js/translations.js"></script>
+  <script src="js/main.js"></script>
+  <script>lucide.createIcons();</script>
+</body>
+</html>
